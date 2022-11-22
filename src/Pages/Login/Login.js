@@ -1,43 +1,66 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { AuthContext } from '../../Context/AuthProvider/Authprovider';
 
 const Login = () => {
+    const {login} = useContext(AuthContext)
 
+    const notify = () => toast("Successfully You Login");
+    const LoginUser= event =>{
+       event.preventDefault()
+       const from = event.target 
+       const email = from.email.value;
+       const password= from.password.value;
+       login(email,password)
+       .then(result =>{
+         const user = result.user
+         console.log(user)
+       })
+       .catch(error => console.log(error));
+
+    }   
 
     
     return (
-        <div>
-            
-<div className="w-full mx-auto container mt-8  bg-white border border-gray-200 rounded-lg shadow-md sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
-    <form className="space-y-6" action="#">
-        <h5 className="text-xl font-medium text-gray-900 text-center dark:text-white">Sign in</h5>
-        <div>
-            <label for="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-            <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Your Email Address" required />
-        </div>
-        <div>
-            <label for="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
-            <input type="password" name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
-        </div>
-        <div className="flex items-start">
-            <div className="flex items-start">
-                <div className="flex items-center h-5">
-                    <input id="remember" type="checkbox" value="" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800" required />
+        <div className="bg-gray-50 dark:bg-gray-900">
+             <ToastContainer />
+        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+         
+            <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+                <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
+                    <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+                        Login Account
+                    </h1>
+                    <form onSubmit={LoginUser} className="space-y-4 md:space-y-6" action="#">
+                        <div>
+                            <label for="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
+                            <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your Email Address" required />
+                        </div>
+                        <div>
+                            <label for="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                            <input type="password" name="password" id="password" placeholder="Password" className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
+                        </div>
+                        
+                        <div className="flex items-start">
+                            <div className="flex items-center h-5">
+                              <input id="terms" aria-describedby="terms" type="checkbox" className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800" required="" />
+                            </div>
+                            <div className="ml-3 text-sm">
+                              <label for="terms" className="font-light text-gray-500 dark:text-gray-300">I accept the <a className="font-medium text-primary-600 hover:underline dark:text-primary-500" href="/">Terms and Conditions</a></label>
+                            </div>
+                        </div>
+                        <button onClick={ notify} type="submit" className="w-full text-white bg-blue-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Log In </button>
+                        <ToastContainer />
+                        <p className="text-sm font-light text-gray-500 dark:text-gray-400">
+                            You don't have Any Account <Link to="/singUp" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Sing Up</Link>
+                        </p>
+                    </form>
                 </div>
-                <label for="remember" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Remember me</label>
             </div>
-            <a href="/" className="ml-auto text-sm text-blue-700 hover:underline dark:text-blue-500">Lost Password?</a>
         </div>
-        <button type="submit" className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login to your account</button>
-        <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
-            Not registered? <Link  to="/register" className="text-blue-700 hover:underline dark:text-blue-500">Create account</Link>
-            <br />
-            <button type="submit" className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-400 dark:focus:ring-blue-800">Google</button>
-        </div>
-    </form>
-</div>
-
-        </div>
+      </div>
     );
 };
 

@@ -53,7 +53,7 @@ const Navbar = () => {
               >
                 Log in
               </Link>
-              <Link to='/register'
+              <Link to='/singUp'
                 className="inline-block rounded-lg px-3 py-1.5 text-sm font-semibold leading-6 text-gray-900 shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20">
                 Register
               </Link>
