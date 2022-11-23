@@ -1,6 +1,6 @@
 [
     {
-        "_id": "635a0c0b64a6d231228942ae",
+
         "service_id": "04",
         "title": "Walking & Sitting",
         "img": "https://i.ibb.co/nC6kfWB/girl-walking-her-dog-white-background-1308-107572.jpg",
@@ -15,7 +15,7 @@
         ]
     },
     {
-        "_id": "635a0c0b64a6d231228942af",
+
         "service_id": "05",
         "title": "Pet Grooming",
         "img": "https://i.ibb.co/fpTDM2V/dog-grooming-service-veterinary-salon-female-pet-owner-groomer-taking-care-canine-blowdrying-domesti.jpg",
@@ -41,7 +41,7 @@
         ]
     },
     {
-        "_id": "635b591a1dafe382a9da8c96",
+
         "service_id": "01",
         "title": "Pet Training",
         "img": "https://i.ibb.co/T8jNZds/award-medal-realistic-composition-with-isolated-image-golden-trophy-cup-blank-background-vector-illu.jpg",
@@ -67,7 +67,7 @@
         ]
     },
     {
-        "_id": "635b5afc1dafe382a9da8c98",
+
         "service_id": "02",
         "title": "Pet Taxi ",
         "img": "https://i.ibb.co/2NYh1Vq/9d098e46930641-5607e9a8bf43b.jpg",
@@ -93,7 +93,7 @@
         ]
     },
     {
-        "_id": "635b5b691dafe382a9da8c99",
+
         "service_id": "03",
         "title": "Health & Wellness",
         "img": "https://i.ibb.co/XJYb6nr/3076840.png",
@@ -119,7 +119,7 @@
         ]
     },
     {
-        "_id": "635b5ba51dafe382a9da8c9a",
+
         "service_id": "06",
         "title": "Pet Hotal",
         "img": "https://i.ibb.co/wBw3d3j/2930731.png",

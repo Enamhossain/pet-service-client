@@ -13,7 +13,7 @@ const Navbar = () => {
   const navItems =
     <>
       <li className='font-semibold list-none text-indigo-600 text-lg '><Link to='/'>Home</Link></li>
-      <li className='font-semibold list-none text-indigo-600 text-lg '><Link to='/'>Services</Link></li>
+      <li className='font-semibold list-none text-indigo-600 text-lg '><Link to='/allService'>Services</Link></li>
       <li className='font-semibold list-none text-indigo-600 text-lg '><Link to='/'>Review</Link></li>
       <li className='font-semibold list-none text-indigo-600 text-lg '><Link to='/'>Blog</Link></li>
     </>
