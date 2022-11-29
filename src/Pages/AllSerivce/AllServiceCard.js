@@ -1,13 +1,19 @@
 import React from 'react';
-
+import { FaArrowRight } from 'react-icons/fa';
+import { PhotoProvider, PhotoView } from 'react-photo-view';
+import 'react-photo-view/dist/react-photo-view.css';
 const AllServiceCard = ({allservices}) => {
-    const {title,img,price,description}=allservices
+    const {title,img,price,description,_id}=allservices
     return (
         
             <div className="grid  hover:bg-blue-400 grid-col-3 w-full mx-auto  bg-white rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700">
-    <a href="/">
-        <img src={img} className="p-5 rounded-t-lg w-32" alt="card img" />
-    </a>
+     <PhotoProvider>
+                <PhotoView key={_id} src={img}>
+                    <img src={img} className="p-5 rounded-t-lg w-32" alt="card img" />
+
+                </PhotoView>
+
+            </PhotoProvider>
     <div className="px-5 pb-5">
         <a href="/">
             <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{title}</h5>
@@ -25,7 +31,7 @@ const AllServiceCard = ({allservices}) => {
             <br />
             <span className="text-gray-900 dark:text-white text-2xl ">{description}</span>
         </div>
-            <button type="button" className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800  rounded-lg text-sm px-5 py-2.5 text-center font-medium  mb-2"> detail </button>
+            <button type="button" className="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800  rounded-lg text-sm px-5 py-2.5 text-center font-medium  mb-2"> Get the Service <FaArrowRight /> </button>
     </div>
         </div>
     );

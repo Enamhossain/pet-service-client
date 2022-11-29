@@ -1,26 +1,55 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { json, Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from '../../Context/AuthProvider/Authprovider';
 
 const Login = () => {
-    const {login} = useContext(AuthContext)
+    const [error, setError] = useState('');
+    const {login,googleLogin} = useContext(AuthContext)
+    const location = useLocation();
+    const navigate = useNavigate();
+    
+    const from = location.state?.from?.pathname || '/';
 
     const notify = () => toast("Successfully You Login");
     const LoginUser= event =>{
        event.preventDefault()
-       const from = event.target 
-       const email = from.email.value;
-       const password= from.password.value;
+       const form = event.target 
+       const email = form.email.value;
+       const password= form.password.value;
        login(email,password)
        .then(result =>{
          const user = result.user
          console.log(user)
-       })
-       .catch(error => console.log(error));
-
+         form.reset();
+                setError('');
+                if(user.emailVerified){
+                    navigate(from, {replace: true});
+                }
+                else{
+                    console.log(error)
+                }
+         
+        })
+       
+        
+        .catch(error => console.error(error)); 
+        
     }   
+    
+    const googleuserLogin = () => {
+        googleLogin()
+        .then(result => {
+            const user = result.user
+            console.log(user)
+        })
+        .then(data => {
+            console.log(data)
+            
+        })
+         .catch(error => console.log(error))
+    }
 
     
     return (
@@ -53,6 +82,7 @@ const Login = () => {
                         </div>
                         <button onClick={ notify} type="submit" className="w-full text-white bg-blue-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Log In </button>
                         <ToastContainer />
+                        <button onClick={()=> googleuserLogin() } type="submit" className="w-full text-white bg-blue-700 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-500 dark:focus:ring-primary-800">Google </button>
                         <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                             You don't have Any Account <Link to="/singUp" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Sing Up</Link>
                         </p>

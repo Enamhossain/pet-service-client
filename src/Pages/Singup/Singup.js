@@ -1,22 +1,36 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider/Authprovider';
 
 const Singup = () => {
- const {createUser} = useContext(AuthContext)
+ const {createUser,updateUserProfile} = useContext(AuthContext)
+ const navigate = useNavigate();
+ const location = useLocation()
+ const from = location.state?.from?.pathname || '/'
 
  const singUp= event =>{
     event.preventDefault()
-    const from = event.target 
-    const email = from.email.value;
-    const password= from.password.value;
-    createUser(email,password)
-    .then(result =>{
-      const user = result.user
-      console.log(user)
+    const form = event.target 
+    const email = form.email.value;
+    const password= form.password.value;
+    createUser(email, password)
+    .then(result => {
+        const user = result.user;
+        console.log(user);
+        form.reset();
+    // handleUpdateUserProfile(name,url )
     })
-    .catch(error => console.log(error));
-
+    .catch(error => console.error(error));
+    
+    const handleUpdateUserProfile = (name, url) => {
+      const profile = {
+          displayName: name,
+          photoURL: url
+      }
+      updateUserProfile(profile)
+      .then(() => { })
+      .catch(error => console.error(error));
+}
  }  
    
 

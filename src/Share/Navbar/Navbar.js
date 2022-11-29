@@ -1,22 +1,22 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Bars3Icon, } from '@heroicons/react/24/outline'
 import { Link } from 'react-router-dom';
-// const navigation = [
-//     { name: 'Home',to='ho' },
-//     { name: 'Service', href: '#' },
-//     { name: 'Review', href: '#' },
-//     { name: 'Blog', href: '#' },
-//   ]
+import { AuthContext } from '../../Context/AuthProvider/Authprovider';
+import { Button } from 'flowbite-react';
+import { FaUserCircle } from 'react-icons/fa';
+
 const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const { user, logOut } = useContext(AuthContext)
 
-  const navItems =
-    <>
-      <li className='font-semibold list-none text-indigo-600 text-lg '><Link to='/'>Home</Link></li>
-      <li className='font-semibold list-none text-indigo-600 text-lg '><Link to='/allService'>Services</Link></li>
-      <li className='font-semibold list-none text-indigo-600 text-lg '><Link to='/'>Review</Link></li>
-      <li className='font-semibold list-none text-indigo-600 text-lg '><Link to='/'>Blog</Link></li>
-    </>
+
+
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => { })
+      .catch(error => console.error(error))
+  }
   return (
     <div className='mb-5' >
       <div className="absolute inset-x-0 top-[-10rem] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[-20rem]">
@@ -43,20 +43,48 @@ const Navbar = () => {
               </button>
             </div>
             <div className="hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-center lg:gap-x-12 ">
-              {
-                navItems
-              }
+              <li className='font-semibold list-none text-indigo-600 text-lg '><Link to='/'>Home</Link></li>
+              <li className='font-semibold list-none text-indigo-600 text-lg '><Link to='/allService'>Services</Link></li>
+              <li className='font-semibold list-none text-indigo-600 text-lg '><Link to='/'>Review</Link></li>
+              <li className='font-semibold list-none text-indigo-600 text-lg '><Link to='/'>Blog</Link></li>
             </div>
             <div className="hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-center">
-              <Link to='/login'
-                className="inline-block rounded-lg px-3 py-1.5 text-sm font-semibold leading-6 text-gray-900 shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20"
-              >
-                Log in
+
+              <>
+                {
+                  user?.uid ?
+                    <>
+                      <span>{user?.displayName}</span>
+                      <Button variant="light" onClick={handleLogOut}>Log out</Button>
+                    </>
+                    :
+                    <>
+                      <Link to='/singUp'
+                        className="inline-block rounded-lg px-3 py-1.5 text-sm font-semibold leading-6 text-gray-900 shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20">
+                        Register
+                      </Link>
+                      <Link to='/login' className="inline-block rounded-lg px-3 py-1.5 text-sm font-semibold leading-6 text-gray-900 shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20">
+                        Log in
+                      </Link>
+                    </>
+                }
+
+
+              </>
+              <Link to="/profile">
+                { user?.photoURL ?
+
+                  <img className="w-10 h-10 rounded-full" 
+                  src={user?.photoURL}
+                  alt="Rounded avatar">
+
+                  </img>
+                  : <FaUserCircle/>
+                }
               </Link>
-              <Link to='/singUp'
-                className="inline-block rounded-lg px-3 py-1.5 text-sm font-semibold leading-6 text-gray-900 shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20">
-                Register
-              </Link>
+
+              
+
             </div>
           </nav>
 
