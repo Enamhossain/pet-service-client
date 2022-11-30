@@ -44,7 +44,7 @@ const Navbar = () => {
             </div>
             <div className="hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-center lg:gap-x-12 ">
               <li className='font-semibold list-none text-indigo-600 text-lg '><Link to='/'>Home</Link></li>
-              <li className='font-semibold list-none text-indigo-600 text-lg '><Link to='/allService'>Services</Link></li>
+              <li className='font-semibold list-none text-indigo-600 text-lg '><Link to='/service'>Services</Link></li>
               <li className='font-semibold list-none text-indigo-600 text-lg '><Link to='/'>Review</Link></li>
               <li className='font-semibold list-none text-indigo-600 text-lg '><Link to='/'>Blog</Link></li>
             </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import Footer from '../../Share/Footer/Footer';
 import Hero from '../../Share/Hero/Hero';
 import MidSection from '../MidSection/MidSection';
-import Service from '../Service/Service';
+ import Service from '../Service/Service';
 
 
 const Home = () => {

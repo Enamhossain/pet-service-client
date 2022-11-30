@@ -6,17 +6,17 @@ const AllServices = () => {
     const [allService,setAllService] = useState([])
 
     useEffect(() => {
-       fetch('http://localhost:5000/allservice')
-       .then(res => res.json())
-       .then(data => setAllService(data))
-    },[])
+        fetch('http://localhost:5000/services')
+        .then(res => res.json())
+        .then(data => setAllService(data))
+     },[])
     return (
         <div>
             <div className="grid gap-3 mx-auto container grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-5">
-          {
-              allService.map(allservices => <AllServiceCard
-              key={allservices._id}
-              allservices={allservices}
+            {
+              allService.map(services => <AllServiceCard
+              key={services._id}
+              services = {services}
               ></AllServiceCard>)
             }
           </div>

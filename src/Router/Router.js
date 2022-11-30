@@ -1,8 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../Layout/Main";
 import AllServices from "../Pages/AllSerivce/AllServices";
+// import AllServices from "../Pages/AllSerivce/AllServices";
+import GetService from "../Pages/GetService/GetService";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
+import Service from "../Pages/Service/Service";
 import Singup from "../Pages/Singup/Singup";
 
 
@@ -17,8 +20,8 @@ const router = createBrowserRouter([
                 element:<Home></Home>
             },
             {
-                path:'/allService',
-                element:<AllServices/>
+                path:'/service',
+                element:<AllServices></AllServices>
             },
             
             {
@@ -28,7 +31,12 @@ const router = createBrowserRouter([
             {
                 path:'/singUp',
                 element:<Singup></Singup>
+            },
+            {
+                path:'/getservice/:id',
+                element:<GetService/>
             }
+
         ]
     },
 ])
