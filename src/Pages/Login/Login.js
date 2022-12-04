@@ -1,8 +1,12 @@
 import React, { useContext, useState } from 'react';
-import { json, Link, useLocation, useNavigate } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
+import {  Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { AuthContext } from '../../Context/AuthProvider/Authprovider';
+import useTitle from '../../hook/useTitle';
+
+
 
 const Login = () => {
     const [error, setError] = useState('');
@@ -11,32 +15,36 @@ const Login = () => {
     const navigate = useNavigate();
     
     const from = location.state?.from?.pathname || '/';
-
-    const notify = () => toast("Successfully You Login");
+    
+  
+    useTitle('login')
+     
     const LoginUser= event =>{
        event.preventDefault()
        const form = event.target 
        const email = form.email.value;
        const password= form.password.value;
        login(email,password)
-       .then(result =>{
-         const user = result.user
-         console.log(user)
-         form.reset();
-                setError('');
-                if(user.emailVerified){
-                    navigate(from, {replace: true});
-                }
-                else{
-                    console.log(error)
-                }
-         
-        })
+       .then(result=>{
+        const user  = result.user;
+        console.log(user);
+        form.reset();
+        navigate(from, {replace: true});
+        setError('')
+    })
+    .catch(error =>{
+        
+    console.error(error)
+    setError(error.message)
+    
+    });
+       
+}    
        
         
-        .catch(error => console.error(error)); 
-        
-    }   
+   
+
+    const notify = () => toast.success('Here is your toast.');
     
     const googleuserLogin = () => {
         googleLogin()
@@ -80,8 +88,8 @@ const Login = () => {
                               <label for="terms" className="font-light text-gray-500 dark:text-gray-300">I accept the <a className="font-medium text-primary-600 hover:underline dark:text-primary-500" href="/">Terms and Conditions</a></label>
                             </div>
                         </div>
-                        <button onClick={ notify} type="submit" className="w-full text-white bg-blue-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Log In </button>
-                        <ToastContainer />
+                        <button onClick={notify}  type="submit" className="w-full text-white bg-blue-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Log In  <Toaster position='center' /></button>
+                       
                         <button onClick={()=> googleuserLogin() } type="submit" className="w-full text-white bg-blue-700 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-500 dark:focus:ring-primary-800">Google </button>
                         <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                             You don't have Any Account <Link to="/singUp" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Sing Up</Link>
