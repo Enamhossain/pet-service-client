@@ -4,9 +4,11 @@ import AddService from "../Pages/AddService/AddService";
 import AllServices from "../Pages/AllSerivce/AllServices";
 import Blog from "../Pages/Blog/Blog";
 import GetService from "../Pages/GetService/GetService";
+import MyReview from "../Pages/GetService/ReviewSection/myReview/MyReview";
 import Home from "../Pages/Home/Home";
 import Login from "../Pages/Login/Login";
 import Singup from "../Pages/Singup/Singup";
+import PrivateRoutes from "./PrivateRouter/PrivateRoutes";
 
 
 
@@ -43,9 +45,14 @@ const router = createBrowserRouter([
             {
                 path:'/getservice/:id',
                 element:<GetService/>,
-                loader:({params}) => fetch(`http://localhost:5000/services/${params.id}`)
+                loader:({params}) => fetch(`https://percat-service-server.vercel.app/services/${params.id}`)
             
-            }
+            },
+            {
+                path:'/myReview',
+                element: <MyReview/> ,
+                loader:({params})=>fetch(`https://percat-service-server.vercel.app/reviews/${params.id}`)               
+            },
 
         ]
     },

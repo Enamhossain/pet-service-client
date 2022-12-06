@@ -1,22 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import useTitle from '../../../hook/useTitle';
+import React, { useEffect,  } from'react';
+
 import ReviewCard from './ReviewCard';
 
-const Review = () => {
-    const [AllReviews, setAllReviews] = useState([]);
+const Review = ({AllReviews,setAllReviews}) => {
+    
     useEffect(() => {
-        fetch('http://localhost:5000/reviews')
+        fetch('https://percat-service-server.vercel.app/reviews')
             .then(res => res.json())
             .then(data => setAllReviews(data))
     }, [])
-    useTitle('Review')
+   
     
     return (
         <div>
             {
-                   AllReviews.map(reviews=> <ReviewCard
-                    key={reviews._id}
-                    reviews={reviews}
+                   AllReviews.map(review => <ReviewCard
+                    key={review._id}
+                    review={review}
                     ></ReviewCard>)
                 }
         </div>

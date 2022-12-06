@@ -1,13 +1,15 @@
+
 import React, { useState } from 'react';
 
-const AddReview = () => {
+
+const AddReview = ({AllReviews,setAllReviews}) => {
     const [review, setReview] = useState()
     const handleAddreview = event => {
         event.preventDefault();
         console.log(review);
 
 
-        fetch('http://localhost:5000/reviews',{
+        fetch('https://percat-service-server.vercel.app/reviews',{
       
         method:'POST',
         headers:{
@@ -18,11 +20,13 @@ const AddReview = () => {
         })
         .then(res=>res.json())
         .then(data=>{
-            if(data.acknowledged){
+            if (data.acknowledged) {
+                alert('service added successfully')
+                setAllReviews([...AllReviews,review])
                 event.target.reset()
-            }
+              }
         })
-
+        
     }
 
     const handleInputBlur = event => {
@@ -36,10 +40,12 @@ const AddReview = () => {
     }
     return (
         <div className='d-flex mb-6'>
-            <form onSubmit={handleAddreview}>
+          <form onSubmit={handleAddreview}>
             <input onBlur={handleInputBlur} type="text" name='reviews' placeholder="Right a review" className="input input-bordered input-error w-full max-w-xs mr-4" />
-            <button className="btn btn-outline btn-error">Submit</button>
+            <button className="bg-blue-300 p-3 rounded-lg ">Submit</button>
             </form>
+
+             
         </div>
     );
 };

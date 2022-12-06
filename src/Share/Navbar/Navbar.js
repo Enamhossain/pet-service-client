@@ -1,21 +1,18 @@
 
 import 'flowbite';
-import React, { useContext, useState } from 'react';
+import React, { useContext,  } from 'react';
 import { Bars3Icon, } from '@heroicons/react/24/outline'
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider/Authprovider';
 
 import { FaUserCircle } from 'react-icons/fa';
 
-const Navbar = () => {
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-    const { user, logOut } = useContext(AuthContext)
-    const menuItems = <>
-        <Link className='text-black decoration-none text-xl font-semibold px-5 ml-4' to='/'>Home</Link>
-        <Link className='text-black decoration-none text-xl font-semibold px-5' to='/services'>Services</Link>
-        <Link className='text-black decoration-none text-xl font-semibold px-5' to='/blogs'>Blog</Link>
-    </>
 
+const Navbar = () => {
+    
+    const { user, logOut } = useContext(AuthContext)
+  
+     
 
 
     const handleLogOut = () => {
@@ -38,27 +35,29 @@ const Navbar = () => {
                             </a>
                             <span className="text-2xl  mx-auto text-indigo-600 font-bold">Cat-pats Care</span>
                         </div>
-                        <div className="flex lg:hidden">
-                            <button
-                                type="button"
-                                className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700"
-                                onClick={() => setMobileMenuOpen(true)}
-                            >
-                                <span className="sr-only">Open main menu</span>
-                                <Bars3Icon className="h-6 w-6" aria-hidden="true" />
-                            </button>
-                        </div>
-                        <div className="hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-center lg:gap-x-12">
+                            
+                        <button  data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
+      <span class="sr-only">Open main menu</span>
+      <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+    </button>
+
+
+                        <div className="hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-center lg:gap-x-10">
                             <h1 className='text-xl mr-4'>
                                 {
                                     user?.uid ?
-                                        <div className='hidden lg:flex lg:min-w-0 lg:flex-1 lg:justify-center lg:gap-x-12'>
+                                        <div className='hidden lg:flex  lg:flex-1 lg:justify-around lg:gap-x-10'>
 
                                             <li className='font-semibold list-none text-indigo-600 text-lg '><Link to='/'>Home</Link></li>
                                             <li className='font-semibold list-none text-indigo-600 text-lg '><Link to='/service'>Services</Link></li>
-                                            <li className='font-semibold list-none text-indigo-600 text-lg '><Link to='/addservice'>Add Service</Link></li>
+                                            <li className='font-semibold list-none text-indigo-600  '><Link to='/addservice'>Add Service</Link></li>
+                                             
                                             <li className='font-semibold list-none text-indigo-600 text-lg '><Link to='/blog'>Blog</Link></li>
-
+                                            <li className='font-semibold list-none text-indigo-600 text-lg '>
+                                                <Link  to='/myReview'>Reviews</Link>
+                                                </li>
+                                          
+                       
                                             <button onClick={handleLogOut} className="btn btn-error mr-2">Log out</button>
                                             <span>{user?.displayName}</span>
 

@@ -3,8 +3,8 @@ import { useEffect } from 'react';
 const useTitle = title => {
    
              useEffect(()=>{
-        document.title=`${title}-Qian`
-    },[title])
+        document.title=`pats-${title}`
+     },[title])
   
 };
 

@@ -6,7 +6,7 @@ const AllServices = () => {
     const [allService,setAllService] = useState([])
 
     useEffect(() => {
-        fetch('http://localhost:5000/services')
+        fetch('https://percat-service-server.vercel.app/services')
         .then(res => res.json())
         .then(data => setAllService(data))
      },[])
