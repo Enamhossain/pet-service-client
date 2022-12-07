@@ -23,7 +23,8 @@ const router = createBrowserRouter([
             },
             {
                 path:'/service',
-                element:<AllServices></AllServices>
+                element:<PrivateRoutes><AllServices></AllServices></PrivateRoutes>
+                
             },
             {
              path:'/addservice',
